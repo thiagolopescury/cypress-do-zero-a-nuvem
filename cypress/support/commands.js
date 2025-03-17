@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (data = {}) => {
+    const {
+      firstName = 'Thiago',
+      lastName = 'Cury',
+      email = 'thiago@email.com',
+      message = 'Gostei muito do atendimento, parabéns!'
+    } = data;
+  
+    cy.xpath('//*[@id="firstName"]').type(firstName);
+    cy.xpath('//*[@id="lastName"]').type(lastName);
+    cy.xpath('//*[@id="email"]').type(email);
+    cy.xpath('//*[@id="open-text-area"]').type(message);
+    cy.xpath('//*[@id="white-background"]/form/button').click();
+  });
